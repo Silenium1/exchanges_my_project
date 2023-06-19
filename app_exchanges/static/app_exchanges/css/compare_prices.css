@@ -1,0 +1,81 @@
+.container {
+    display: flex;
+}
+
+.sidebar2 {
+    width: 222px;
+    border-right: 1px solid black;
+    flex-shrink: 0;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+    min-height: 100vh;
+}
+
+.content {
+    margin-left: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 400;
+    width: 100%;
+}
+
+th,
+td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.fixed-width {
+    width: 250px;
+    max-width: 250px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+h1 {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+}
+
+.sidebar2 ul {
+    list-style: none;
+    padding: 0;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 0;
+    list-style: none;
+    z-index: 1;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-title {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.dropdown-title::before {
+    content: '\25bc';
+    margin-right: 5px;
+}
+
+input[type="checkbox"]:checked + label {
+    color: black;
+}
