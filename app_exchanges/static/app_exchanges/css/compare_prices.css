@@ -79,3 +79,16 @@ h1 {
 input[type="checkbox"]:checked + label {
     color: black;
 }
+
+.main-page-link {
+    margin-top: 20px;
+}
+
+.main-page-link a {
+    color: #0000EE; /* Standard link color */
+    text-decoration: none; /* Removes underline */
+}
+
+.main-page-link a:hover {
+    text-decoration: underline;
+}/* Adds underline on hover */

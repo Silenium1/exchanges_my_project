@@ -1,5 +1,159 @@
+{% load static %}
+<style>
+  .center-heading {
+    text-align: center;
+  }
+
+  .add-exchange {
+    float: right;
+  }
+</style>
+
+<h1 class="center-heading">Admin Dashboard</h1>
+
+
+<h1 class="center-heading">Exchanges management</h1>
+
+
+<div class="add-exchange">
+  <h2>Add a new exchange</h2>
+  <form method="post">
+    {% csrf_token %}  {# Cross-Site Request Forgery token #}
+    {{ exchange_form.as_p }} {# render the form fields #}
+    <button type="submit" name="exchange">Add Exchange</button>
+      {# HTML button, When clicked#}
+      {#form data will be packaged into a POST request and sent to the server #}
+  </form>
+</div>
+
+{# table for all exchanges #}
+<table class="exchange-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for exchange in exchanges %}
+    <tr>
+      <td>{{ exchange.exchange_abbr }}</td>
+      <td>{{ exchange.exchange_name }}</td>
+      <td>
+        <form action="{% url 'delete_exchange' exchange.id %}" method="POST">
+          {% csrf_token %}
+          <button type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="2">No exchanges yet.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{# ------------------------------------------------- #}
+
+
+<style>
+  .center-heading {
+    text-align: center;
+  }
+</style>
+
+<h1 class="center-heading">Admin DashBoard</h1>
+
+<h1>Commodities</h1>
+
+<table class="commodity-table">
+  <thead>
+    <tr>
+      <th>Ticker Name</th>
+      <th>Description</th>
+      <th>Unit Integer Value</th>
+      <th>Unit String Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for commodity in commodities %}
+    <tr>
+      <td>{{ commodity.commodity_ticker_name }}</td>
+      <td>{{ commodity.commodity_descr }}</td>
+      <td>{{ commodity.unit_int_value }}</td>
+      <td>{{ commodity.unit_str_value }}</td>
+      <td>
+        <form action="{% url 'delete_commodity' commodity.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="4">No commodities yet.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2>Add a new commodity</h2>
+
 <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Create Exchange</button>
+  {% csrf_token %}
+  {{ commodity_form.as_p }}
+  <button type="submit" name="commodity">Add Commodity</button>
+</form>
+
+
+</style>
+
+<h1 class="center-heading">Currencies management</h1>
+
+<h1>Currencies</h1>
+
+<table class="commodity-table">
+  <thead>
+    <tr>
+      <th>Ticker Name</th>
+      <th>Description</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for currency in currencies %}
+    <tr>
+      <td>{{ currency.currency_ticker_name }}</td>
+      <td>{{ currency.currency_descr }}</td>
+      <td>{{ currency.type }}</td>
+      <td>
+        <form action="{% url 'delete_currency' currency.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="4">No currencies yet.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2>Add a new currency</h2>
+
+<form method="post">
+  {% csrf_token %}
+  {{ currency_form.as_p }}
+  <button type="submit" name="currency">Add Currency</button>
+</form>
+
+<h2>Add a new Exchanges_Commodities</h2>
+
+<form method="post">
+  {% csrf_token %}
+  {{ exchanges_commodities_form.as_p }}
+  <button type="submit" name="exchanges_commodities">Add Exchanges_Commodities</button>
 </form>

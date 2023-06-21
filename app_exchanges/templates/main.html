@@ -1,113 +1,69 @@
 {% load static %}
-<!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Your page description here">
-    <meta name="keywords" content="your, keywords, here">
-    <meta name="author" content="Your Name">
-    <title>Your Page Title</title>
+    <meta name="description" content="Exchanges report">
+    <title>Exchanges report</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'app_exchanges/css/main.css' %}">
     <style>
-        /* Custom checkbox styling */
-        input[type="checkbox"] {
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            width: 16px;
-            height: 16px;
-            border: 2px solid #ccc;
-            border-radius: 3px;
-            background-color: #fff;
-            vertical-align: middle;
-            margin-right: 5px;
+        /* Add custom styles for the checkbox list */
+        .checkbox-list {
+            list-style-type: none;
+            padding: 0;
         }
-
-        input[type="checkbox"]:checked {
-            background-color: #5cb85c;
-        }
-
-        .checkbox-label {
-            display: inline-block;
-            vertical-align: middle;
+        .checkbox-list li {
             margin-bottom: 5px;
-            cursor: pointer;
-        }
-
-        .checkbox-label:hover {
-            color: #000;
         }
     </style>
 </head>
 <body>
+    <a class="top-right-link" href="{% url 'admin_dashboard' %}">Go to Admin Dashboard</a>{# link to the admin dashboard #}
     <div class="container">
-        <div class="sidebar1">
+        <div class="sidebar1"> {# link to the admin dashboard #}
             <h2>Logo</h2>
             <form id="filter-form" method="GET" action="{% url 'main_view' %}">
                 <h3>Main Filters</h3>
-                <ul>
-                    <li class="dropdown">
-                        <span class="dropdown-title" onclick="toggleDropdown('asset-class-dropdown')">Asset class</span>
-                        <ul class="dropdown-menu" id="asset-class-dropdown">
-                            <li>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="asset_class" value="all" {% if 'all' in selected_asset_classes %} checked{% endif %}>
-                                    All Asset Classes
-                                </label>
-                            </li>
-                            <li>
-                                <span id="select-all-asset-classes" onclick="selectAllAssetClasses()">Select All</span> |
-                                <span id="deselect-all-asset-classes" onclick="deselectAllAssetClasses()">Deselect All</span>
-                            </li>
-                            <li>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="asset_class" value="Commodity" {% if 'Commodity' in selected_asset_classes %} checked{% endif %}>
-                                    Commodity
-                                </label>
-                            </li>
-                            <li>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="asset_class" value="Currency" {% if 'Currency' in selected_asset_classes %} checked{% endif %}>
-                                    Currency
-                                </label>
-                            </li>
-                        </ul>
+                <ul class="checkbox-list"> {# checkboxes for asset classes #}
+                    <li>
+                        <strong>Asset class</strong>
                     </li>
-                    <li class="dropdown">
-                        <span class="dropdown-title" onclick="toggleDropdown('exchange-dropdown')">Exchange</span>
-                        <ul class="dropdown-menu" id="exchange-dropdown">
-                            <li><input type="checkbox" name="exchange" value="all" {% if 'all' in selected_exchanges %} checked {% endif %}>All</li>
-                            <li><span onclick="selectAllExchanges()">Select All</span> | <span onclick="deselectAllExchanges()">Deselect All</span></li>
-                            {% for exchange_id, exchange_name in all_exchanges.items %}
-                                <li><input type="checkbox" name="exchange" value="{{ exchange_id }}" {% if exchange_id in selected_exchanges %} checked {% endif %}> {{ exchange_name }}</li>
-                            {% endfor %}
-                        </ul>
+                    <li>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="asset_class" value="all">{# checkbox for all #}
+                            All Asset Classes
+                        </label>
+                    </li>
+                    <li>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="asset_class" value="Commodity">{# checkbox for commodity #}
+                            Commodity
+                        </label>
+                    </li>
+                    <li>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="asset_class" value="Currency">{# checkbox for currency #}
+                            Currency
+                        </label>
                     </li>
                 </ul>
                 <h3>Currency filters</h3>
-                <ul>
-                    <li class="dropdown">
-                        <span class="dropdown-title" onclick="toggleDropdown('type-dropdown')">Type</span>
-                        <ul class="dropdown-menu" id="type-dropdown">
-                            <li><input type="checkbox" name="types" value="all" {% if 'all' in selected_types %} checked{% endif %}>All</li>
-                            {% for type_name in all_types %}
-                                {% if type_name != 'None' %}
-                                    <li><input type="checkbox" name="types" value="{{ type_name }}" {% if type_name in selected_types %} checked{% endif %}> {{ type_name }}</li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
+                <ul class="checkbox-list">
+                    <li>
+                        <strong>Currency Type</strong>
                     </li>
-                    <li class="dropdown">
-                        <span class="dropdown-title" onclick="toggleDropdown('tenor-dropdown')">Tenor</span>
-                        <ul class="dropdown-menu" id="tenor-dropdown">
-                            <li><input type="checkbox" name="tenor" value="all" {% if 'all' in selected_tenor %}checked{% endif %}> Any</li>
-                            {% for tenor in all_tenors %}
-                                <li><input type="checkbox" name="tenor" value="{{ tenor }}" {% if tenor in selected_tenor %}checked{% endif %}> {{ tenor }}</li>
-                            {% endfor %}
-                        </ul>
+                    {% for type in currency_types %}
+                    <li>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="types" value="{{ type }}">  {# checkbox for each currency type #}
+                            {{ type }}
+                        </label>
                     </li>
+                    {% endfor %}
                 </ul>
+                <button type="submit">Apply Filters</button>
+                <button type="reset" onclick="location.href='{{ request.path }}'">Reset Filters</button> <!-- Updated button with onclick event -->
             </form>
         </div>
         <div class="content">
@@ -126,88 +82,17 @@
                         <td>{{ info.asset_class }}</td>
                         <td class="fixed-width">{{ info.ticker }}</td>
                         <th>
-                            <a href="http://127.0.0.1:8000/{{ info.asset_class|slugify }}/{{ info.ticker|slugify }}/{{ ticker.1 }}/">Compare prices</a>
+                            <a href="{% url 'asset_class' info.asset_class|slugify info.ticker|slugify ticker.1 %}">Compare prices</a>
                         </th>
-                </tr>
+                    </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="4">No tickers found.</td>
+                        <td colspan="3">No tickers found.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
-    <script>
-    function toggleDropdown(dropdownId) {
-        const dropdownMenu = document.getElementById(dropdownId);
-        dropdownMenu.classList.toggle('show');
-    }
-
-    function selectAllAssetClasses() {
-        const assetClassCheckboxes = document.getElementsByName('asset_class');
-        for (let i = 0; i < assetClassCheckboxes.length; i++) {
-            assetClassCheckboxes[i].checked = true;
-        }
-        updateFilterForm();
-    }
-
-    function deselectAllAssetClasses() {
-        const assetClassCheckboxes = document.getElementsByName('asset_class');
-        for (let i = 0; i < assetClassCheckboxes.length; i++) {
-            assetClassCheckboxes[i].checked = false;
-        }
-        updateFilterForm();
-    }
-
-    function selectAllExchanges() {
-        const exchangeCheckboxes = document.getElementsByName('exchange');
-        for (let i = 0; i < exchangeCheckboxes.length; i++) {
-            exchangeCheckboxes[i].checked = true;
-        }
-        updateFilterForm();
-    }
-
-    function deselectAllExchanges() {
-        const exchangeCheckboxes = document.getElementsByName('exchange');
-        for (let i = 0; i < exchangeCheckboxes.length; i++) {
-            exchangeCheckboxes[i].checked = false;
-        }
-        updateFilterForm();
-    }
-
-    function updateFilterForm() {
-        const filterForm = document.getElementById('filter-form');
-        filterForm.submit();
-    }
-
-    const tickerRows = document.getElementsByClassName('ticker-row');
-    const assetClassDropdown = document.getElementById('asset-class-dropdown');
-
-    assetClassDropdown.addEventListener('change', function() {
-        const selectedAssetClasses = Array.from(document.querySelectorAll('input[name="asset_class"]:checked')).map((checkbox) => checkbox.value);
-        for (let i = 0; i < tickerRows.length; i++) {
-            const tickerRow = tickerRows[i];
-            const assetClass = tickerRow.getAttribute('data-asset-class');
-            if (selectedAssetClasses.includes(assetClass) || selectedAssetClasses.includes('all')) {
-                tickerRow.style.display = '';
-            } else {
-                tickerRow.style.display = 'none';
-            }
-        }
-    });
-
-    window.onload = function() {
-        const allAssetClassesCheckbox = document.getElementsByName('asset_class')[0];
-        allAssetClassesCheckbox.addEventListener('change', function() {
-            if (this.checked) {
-                selectAllAssetClasses();
-            } else {
-                deselectAllAssetClasses();
-            }
-        });
-    };
-</script>
-
 </body>
 </html>

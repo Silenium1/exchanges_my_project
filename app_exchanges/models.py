@@ -55,7 +55,7 @@ class Exchanges_Commodities(models.Model):
     id = models.AutoField(primary_key=True)
     exchange = models.ForeignKey(Exchange, on_delete=models.CASCADE)
     commodity_ticker_name = models.ForeignKey(Commodity, on_delete=models.CASCADE)
-    time_of_last_trade = models.CharField(max_length=50, null=True)
+    time_of_last_trade = models.DateField(null=True, blank=True)
     price = models.IntegerField()
 
 
@@ -83,8 +83,8 @@ class Exchanges_Currencies(models.Model):
     base_currency = models.CharField(max_length=15, choices=currency_list, default=USD)
     new_currency = models.CharField(max_length=15, choices=currency_list, default=USD)
     tenor_months = models.CharField(max_length=15, choices=tenor_options, default='--')
-    settlement_date = models.DateTimeField(null=True, blank=True)
-    settlement_date_swap = models.DateTimeField(null=True, blank=True)
+    settlement_date = models.DateField(null=True, blank=True)
+    settlement_date_swap = models.DateField(null=True, blank=True)
     price = models.IntegerField()
 
 
