@@ -1,10 +1,8 @@
 from django.shortcuts import render
-from django.http import Http404
-from django.db.models import F
+
 from django.shortcuts import redirect
 from .models import Exchange, Commodity, Currency, Exchanges_Commodities, Exchanges_Currencies
-from django.db.models.functions import Lower
-from django.contrib.admin.views.decorators import staff_member_required
+
 from .forms import CommodityForm
 from .forms import ExchangeForm
 from .forms import CurrencyForm
@@ -99,7 +97,7 @@ def main_view(request, asset_class=None):
             'tenor': currency.tenor_months,  # storing Tenor date
             'currency_type': currency.currency_ticker_name.type  #storing a currency type
         }
-
+    print(all_tickers)
     filtered_tickers = {} # creating a dictionary to store a filtered on the user's side data
 
     if "all" in selected_asset_classes or not asset_classes: #
@@ -125,18 +123,17 @@ def main_view(request, asset_class=None):
 
 def admin_dashboard(request):
     if request.method == "POST":
-        if 'exchange' in request.POST:
-            exchange_form = ExchangeForm(request.POST)
-            if exchange_form.is_valid():
-                print('test')
-                exchange_form.save()
-                return redirect('admin_dashboard')
+        if 'exchange' in request.POST: #handle a form Add a new exchange
+            exchange_form = ExchangeForm(request.POST) #Initializes
+            # the ExchangeForm with the POST data
+            if exchange_form.is_valid(): # Validates the form data
+                exchange_form.save() #Saves the form data
+                # (creating a new Exchange object in the database).
+                return redirect('admin_dashboard') # Redirects back to the same page
             else:
                 print(exchange_form.errors)
-        else:
-            exchange_form = ExchangeForm()
 
-        if 'commodity' in request.POST:
+        if 'commodity' in request.POST: #handle a form add a new commodity
             commodity_form = CommodityForm(request.POST)
             if commodity_form.is_valid():
                 commodity_form.save()
@@ -144,21 +141,19 @@ def admin_dashboard(request):
         else:
             commodity_form = CommodityForm()
 
-        if 'currency' in request.POST:
+        if 'currency' in request.POST: #handle a form add a new currency
             currency_form = CurrencyForm(request.POST)
             if currency_form.is_valid():
                 currency_form.save()
                 return redirect('admin_dashboard')
-        else:
-            currency_form = CurrencyForm()
 
-        if 'exchanges_commodities' in request.POST:
+
+        if 'exchanges_commodities' in request.POST: #handle a form exchange commodities
             exchanges_commodities_form = ExchangesCommoditiesForm(request.POST)
             if exchanges_commodities_form.is_valid():
                 exchanges_commodities_form.save()
                 return redirect('admin_dashboard')
-        else:
-            exchanges_commodities_form = ExchangesCommoditiesForm()
+
 
     else:
         exchange_form = ExchangeForm()
@@ -179,17 +174,17 @@ def admin_dashboard(request):
         'exchanges_commodities_form': exchanges_commodities_form
     })
 
-def delete_exchange(request, id):
-    exchange = Exchange.objects.get(id=id)
-    exchange.delete()
+def delete_exchange(request, id): #method to delete exchanges from the database
+    exchange = Exchange.objects.get(id=id) #fetching the exchange object with the given id from the database
+    exchange.delete() # deleting the fetched Exchange object from the database.
     return redirect('admin_dashboard')
 
-def delete_commodity(request, id):
+def delete_commodity(request, id): #method to delete commodities
     commodity = Commodity.objects.get(id=id)
     commodity.delete()
     return redirect('admin_dashboard')
 
-def delete_currency(request, id):
+def delete_currency(request, id): #methos to delete currency
     currency = Currency.objects.get(id=id)
     currency.delete()
     return redirect('admin_dashboard')

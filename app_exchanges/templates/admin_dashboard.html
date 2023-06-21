@@ -14,12 +14,12 @@
 
 <h1 class="center-heading">Exchanges management</h1>
 
-
+{# add-exchange form #}
 <div class="add-exchange">
   <h2>Add a new exchange</h2>
   <form method="post">
     {% csrf_token %}  {# Cross-Site Request Forgery token #}
-    {{ exchange_form.as_p }} {# render the form fields #}
+    {{ exchange_form.as_p }} {# render the form fields #} {# exchange_form_ #}
     <button type="submit" name="exchange">Add Exchange</button>
       {# HTML button, When clicked#}
       {#form data will be packaged into a POST request and sent to the server #}
@@ -142,6 +142,7 @@
   </tbody>
 </table>
 
+{# ------------------------------------------------- #}
 <h2>Add a new currency</h2>
 
 <form method="post">
@@ -149,6 +150,8 @@
   {{ currency_form.as_p }}
   <button type="submit" name="currency">Add Currency</button>
 </form>
+
+{# ------------------------------------------------- #}
 
 <h2>Add a new Exchanges_Commodities</h2>
 

@@ -87,13 +87,14 @@
             filterTable();
         };
 
-        function updateCheckboxState(checkbox) {
+        function updateCheckboxState(checkbox) { {# update a checkbox visually  #}
             localStorage.setItem(checkbox.id, checkbox.checked);
             filterTable();
         }
 
-        function selectAllExchanges(checkbox) {
-            const exchangeCheckboxes = document.getElementsByName('exchange');
+        function selectAllExchanges(checkbox) {   {# choose exchanges #}
+            const exchangeCheckboxes = document.getElementsByName('exchange'); {# choose exchanges #}
+            {# name="exchange" value="all" onclick="selectAllExchanges(this);"> #}
             for (let i = 0; i < exchangeCheckboxes.length; i++) {
                 exchangeCheckboxes[i].checked = checkbox.checked;
                 updateCheckboxState(exchangeCheckboxes[i]);
@@ -101,7 +102,7 @@
             filterTable();
         }
 
-        function filterTable() {
+        function filterTable() {  {# filter out table #}
             const exchangeCheckboxes = document.getElementsByName('exchange');
             const exchangeTable = document.getElementById('exchange-table');
             const rows = exchangeTable.getElementsByTagName('tr');
