@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app_exchanges', '0001_initial'),
+        ("app_exchanges", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='commodity',
-            name='unit_int_value',
+            model_name="commodity",
+            name="unit_int_value",
             field=models.IntegerField(),
         ),
     ]

@@ -4,63 +4,62 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app_exchanges', '0008_remove_ticker_slug'),
+        ("app_exchanges", "0008_remove_ticker_slug"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='commodity',
-            name='id_asset_class',
+            model_name="commodity",
+            name="id_asset_class",
         ),
         migrations.RemoveField(
-            model_name='commodity',
-            name='id_exchange',
+            model_name="commodity",
+            name="id_exchange",
         ),
         migrations.RemoveField(
-            model_name='commodity',
-            name='id_ticker',
+            model_name="commodity",
+            name="id_ticker",
         ),
         migrations.RemoveField(
-            model_name='currency',
-            name='exchanged_currency',
+            model_name="currency",
+            name="exchanged_currency",
         ),
         migrations.RemoveField(
-            model_name='currency',
-            name='id_asset_class',
+            model_name="currency",
+            name="id_asset_class",
         ),
         migrations.RemoveField(
-            model_name='currency',
-            name='id_exchange',
+            model_name="currency",
+            name="id_exchange",
         ),
         migrations.RemoveField(
-            model_name='currency',
-            name='id_ticker',
+            model_name="currency",
+            name="id_ticker",
         ),
         migrations.RemoveField(
-            model_name='currency',
-            name='settlement_date',
+            model_name="currency",
+            name="settlement_date",
         ),
         migrations.RemoveField(
-            model_name='currency',
-            name='settlement_date_swap',
+            model_name="currency",
+            name="settlement_date_swap",
         ),
         migrations.RemoveField(
-            model_name='currency',
-            name='tenor_months',
+            model_name="currency",
+            name="tenor_months",
         ),
         migrations.AlterField(
-            model_name='commodity',
-            name='id',
+            model_name="commodity",
+            name="id",
             field=models.AutoField(primary_key=True, serialize=False),
         ),
         migrations.AlterField(
-            model_name='exchange',
-            name='id',
+            model_name="exchange",
+            name="id",
             field=models.AutoField(primary_key=True, serialize=False),
         ),
         migrations.DeleteModel(
-            name='Ticker',
+            name="Ticker",
         ),
     ]

@@ -4,20 +4,19 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app_exchanges', '0016_alter_commodity_commodity_descr_and_more'),
+        ("app_exchanges", "0016_alter_commodity_commodity_descr_and_more"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='exchanges_commodities',
-            old_name='commodity',
-            new_name='commodity_ticker_name',
+            model_name="exchanges_commodities",
+            old_name="commodity",
+            new_name="commodity_ticker_name",
         ),
         migrations.RenameField(
-            model_name='exchanges_currencies',
-            old_name='currency',
-            new_name='currency_ticker_name',
+            model_name="exchanges_currencies",
+            old_name="currency",
+            new_name="currency_ticker_name",
         ),
     ]

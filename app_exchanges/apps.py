@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class AppExchangesConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'app_exchanges'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "app_exchanges"

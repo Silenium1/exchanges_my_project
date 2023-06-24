@@ -4,20 +4,23 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app_exchanges', '0006_alter_commodity_id_asset_class_and_more'),
+        ("app_exchanges", "0006_alter_commodity_id_asset_class_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='ticker',
-            name='slug',
+            model_name="ticker",
+            name="slug",
             field=models.SlugField(blank=True, max_length=60, unique=True),
         ),
         migrations.AlterField(
-            model_name='currency',
-            name='tenor_months',
-            field=models.CharField(choices=[('1 M', '1 M'), ('2 M', '2 M'), ('3 M', '3 M')], default='1 M', max_length=15),
+            model_name="currency",
+            name="tenor_months",
+            field=models.CharField(
+                choices=[("1 M", "1 M"), ("2 M", "2 M"), ("3 M", "3 M")],
+                default="1 M",
+                max_length=15,
+            ),
         ),
     ]

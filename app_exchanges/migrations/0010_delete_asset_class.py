@@ -4,13 +4,12 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app_exchanges', '0009_remove_commodity_id_asset_class_and_more'),
+        ("app_exchanges", "0009_remove_commodity_id_asset_class_and_more"),
     ]
 
     operations = [
         migrations.DeleteModel(
-            name='Asset_class',
+            name="Asset_class",
         ),
     ]

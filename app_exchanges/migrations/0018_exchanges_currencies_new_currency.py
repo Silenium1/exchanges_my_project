@@ -4,15 +4,21 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app_exchanges', '0017_rename_commodity_exchanges_commodities_commodity_ticker_name_and_more'),
+        (
+            "app_exchanges",
+            "0017_rename_commodity_exchanges_commodities_commodity_ticker_name_and_more",
+        ),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='exchanges_currencies',
-            name='new_currency',
-            field=models.CharField(choices=[('USD', 'USD'), ('EUR', 'EUR'), ('GBP', 'GBP')], default='USD', max_length=15),
+            model_name="exchanges_currencies",
+            name="new_currency",
+            field=models.CharField(
+                choices=[("USD", "USD"), ("EUR", "EUR"), ("GBP", "GBP")],
+                default="USD",
+                max_length=15,
+            ),
         ),
     ]

@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app_exchanges', '0002_alter_commodity_unit_int_value'),
+        ("app_exchanges", "0002_alter_commodity_unit_int_value"),
     ]
 
     operations = [
         migrations.RenameModel(
-            old_name='Tickers',
-            new_name='Ticker',
+            old_name="Tickers",
+            new_name="Ticker",
         ),
     ]
