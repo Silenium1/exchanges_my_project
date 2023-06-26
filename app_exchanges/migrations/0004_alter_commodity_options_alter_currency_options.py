@@ -4,17 +4,18 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
+
     dependencies = [
-        ("app_exchanges", "0003_rename_tickers_ticker"),
+        ('app_exchanges', '0003_rename_tickers_ticker'),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name="commodity",
-            options={"verbose_name": "Commodity", "verbose_name_plural": "Commodities"},
+            name='commodity',
+            options={'verbose_name': 'Commodity', 'verbose_name_plural': 'Commodities'},
         ),
         migrations.AlterModelOptions(
-            name="currency",
-            options={"verbose_name": "Currency", "verbose_name_plural": "Currencies"},
+            name='currency',
+            options={'verbose_name': 'Currency', 'verbose_name_plural': 'Currencies'},
         ),
     ]

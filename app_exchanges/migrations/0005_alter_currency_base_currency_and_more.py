@@ -4,36 +4,25 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
+
     dependencies = [
-        ("app_exchanges", "0004_alter_commodity_options_alter_currency_options"),
+        ('app_exchanges', '0004_alter_commodity_options_alter_currency_options'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name="currency",
-            name="base_currency",
-            field=models.CharField(
-                choices=[("USD", "USD"), ("EUR", "EUR"), ("GBP", "GBP")],
-                default="USD",
-                max_length=15,
-            ),
+            model_name='currency',
+            name='base_currency',
+            field=models.CharField(choices=[('USD', 'USD'), ('EUR', 'EUR'), ('GBP', 'GBP')], default='USD', max_length=15),
         ),
         migrations.AlterField(
-            model_name="currency",
-            name="exchanged_currency",
-            field=models.CharField(
-                choices=[("USD", "USD"), ("EUR", "EUR"), ("GBP", "GBP")],
-                default="EUR",
-                max_length=15,
-            ),
+            model_name='currency',
+            name='exchanged_currency',
+            field=models.CharField(choices=[('USD', 'USD'), ('EUR', 'EUR'), ('GBP', 'GBP')], default='EUR', max_length=15),
         ),
         migrations.AlterField(
-            model_name="currency",
-            name="tenor_months",
-            field=models.CharField(
-                choices=[("1 M", "1 M"), ("2 M", "2 M"), ("3 M", "3 M")],
-                default="EUR",
-                max_length=15,
-            ),
+            model_name='currency',
+            name='tenor_months',
+            field=models.CharField(choices=[('1 M', '1 M'), ('2 M', '2 M'), ('3 M', '3 M')], default='EUR', max_length=15),
         ),
     ]

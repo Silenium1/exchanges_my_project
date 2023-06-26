@@ -5,148 +5,63 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
+
     initial = True
 
-    dependencies = []
+    dependencies = [
+    ]
 
     operations = [
         migrations.CreateModel(
-            name="Asset_class",
+            name='Asset_class',
             fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                ("asset_class", models.CharField(max_length=30)),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('asset_class', models.CharField(max_length=30)),
             ],
         ),
         migrations.CreateModel(
-            name="Exchange",
+            name='Exchange',
             fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                ("exchange_abbr", models.CharField(max_length=15)),
-                ("exchange_name", models.CharField(max_length=30)),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('exchange_abbr', models.CharField(max_length=15)),
+                ('exchange_name', models.CharField(max_length=30)),
             ],
         ),
         migrations.CreateModel(
-            name="Tickers",
+            name='Tickers',
             fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                ("ticker_name", models.CharField(max_length=30)),
-                ("ticker_descr", models.CharField(max_length=50)),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('ticker_name', models.CharField(max_length=30)),
+                ('ticker_descr', models.CharField(max_length=50)),
             ],
         ),
         migrations.CreateModel(
-            name="Currency",
+            name='Currency',
             fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                (
-                    "type",
-                    models.CharField(
-                        choices=[
-                            ("SPOT", "SPOT"),
-                            ("FORWARD", "FORWARD"),
-                            ("SWAP", "SWAP"),
-                        ],
-                        default="SPOT",
-                        max_length=15,
-                    ),
-                ),
-                ("base_currency", models.CharField(max_length=10)),
-                ("exchanged_currency", models.CharField(max_length=10)),
-                ("price", models.IntegerField()),
-                ("tenor_months", models.IntegerField()),
-                ("settlement_date", models.CharField(max_length=10)),
-                ("settlement_date_swap", models.CharField(max_length=10)),
-                (
-                    "id_asset_class",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        to="app_exchanges.asset_class",
-                    ),
-                ),
-                (
-                    "id_exchange",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        to="app_exchanges.exchange",
-                    ),
-                ),
-                (
-                    "id_ticker",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        to="app_exchanges.tickers",
-                    ),
-                ),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('type', models.CharField(choices=[('SPOT', 'SPOT'), ('FORWARD', 'FORWARD'), ('SWAP', 'SWAP')], default='SPOT', max_length=15)),
+                ('base_currency', models.CharField(max_length=10)),
+                ('exchanged_currency', models.CharField(max_length=10)),
+                ('price', models.IntegerField()),
+                ('tenor_months', models.IntegerField()),
+                ('settlement_date', models.CharField(max_length=10)),
+                ('settlement_date_swap', models.CharField(max_length=10)),
+                ('id_asset_class', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app_exchanges.asset_class')),
+                ('id_exchange', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app_exchanges.exchange')),
+                ('id_ticker', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app_exchanges.tickers')),
             ],
         ),
         migrations.CreateModel(
-            name="Commodity",
+            name='Commodity',
             fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                ("unit_int_value", models.IntegerField(max_length=50)),
-                ("unit_str_value", models.CharField(max_length=50)),
-                ("price", models.IntegerField()),
-                ("time_of_last_trade", models.CharField(max_length=50)),
-                (
-                    "id_asset_class",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        to="app_exchanges.asset_class",
-                    ),
-                ),
-                (
-                    "id_exchange",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        to="app_exchanges.exchange",
-                    ),
-                ),
-                (
-                    "id_ticker",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        to="app_exchanges.tickers",
-                    ),
-                ),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('unit_int_value', models.IntegerField(max_length=50)),
+                ('unit_str_value', models.CharField(max_length=50)),
+                ('price', models.IntegerField()),
+                ('time_of_last_trade', models.CharField(max_length=50)),
+                ('id_asset_class', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app_exchanges.asset_class')),
+                ('id_exchange', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app_exchanges.exchange')),
+                ('id_ticker', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app_exchanges.tickers')),
             ],
         ),
     ]

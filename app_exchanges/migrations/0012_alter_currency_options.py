@@ -4,16 +4,14 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
+
     dependencies = [
-        (
-            "app_exchanges",
-            "0011_alter_currency_options_remove_commodity_price_and_more",
-        ),
+        ('app_exchanges', '0011_alter_currency_options_remove_commodity_price_and_more'),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name="currency",
-            options={"verbose_name": "Currency", "verbose_name_plural": "Currencies"},
+            name='currency',
+            options={'verbose_name': 'Currency', 'verbose_name_plural': 'Currencies'},
         ),
     ]

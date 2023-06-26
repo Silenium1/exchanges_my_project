@@ -1,162 +1,190 @@
-{% load static %}
-<style>
-  .center-heading {
-    text-align: center;
-  }
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .center-heading {
+      text-align: center;
+    }
 
-  .add-exchange {
-    float: right;
-  }
-</style>
+    .add-sidebar{
+      float: right;
+    }
 
-<h1 class="center-heading">Admin Dashboard</h1>
+    .messages {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
+    .messages li {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+    }
 
-<h1 class="center-heading">Exchanges management</h1>
+    .messages li.success {
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+    }
 
-{# add-exchange form #}
-<div class="add-exchange">
-  <h2>Add a new exchange</h2>
-  <form method="post">
-    {% csrf_token %}  {# Cross-Site Request Forgery token #}
-    {{ exchange_form.as_p }} {# render the form fields #} {# exchange_form_ #}
-    <button type="submit" name="exchange">Add Exchange</button>
-      {# HTML button, When clicked#}
-      {#form data will be packaged into a POST request and sent to the server #}
-  </form>
-</div>
+    .bordered-table {
+      border-collapse: collapse;
+    }
 
-{# table for all exchanges #}
-<table class="exchange-table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for exchange in exchanges %}
-    <tr>
-      <td>{{ exchange.exchange_abbr }}</td>
-      <td>{{ exchange.exchange_name }}</td>
-      <td>
-        <form action="{% url 'delete_exchange' exchange.id %}" method="POST">
-          {% csrf_token %}
-          <button type="submit">Delete</button>
-        </form>
-      </td>
-    </tr>
-    {% empty %}
-    <tr>
-      <td colspan="2">No exchanges yet.</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+    .bordered-table th,
+    .bordered-table td {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
 
-{# ------------------------------------------------- #}
+    .bordered-table th {
+      background-color: #f9f9f9;
+    }
 
+    .bordered-table .success {
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="center-heading">Admin Dashboard</h1>
 
-<style>
-  .center-heading {
-    text-align: center;
-  }
-</style>
+  <h1 class="center-heading">Exchanges management</h1>
 
-<h1 class="center-heading">Admin DashBoard</h1>
+  <div class="add-sidebar">
+    <h2>Add a new exchange</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ exchange_form.as_p }}
+      <button type="submit" name="exchange">Add Exchange</button>
+    </form>
+  </div>
 
-<h1>Commodities</h1>
-
-<table class="commodity-table">
-  <thead>
-    <tr>
-      <th>Ticker Name</th>
-      <th>Description</th>
-      <th>Unit Integer Value</th>
-      <th>Unit String Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for commodity in commodities %}
-    <tr>
-      <td>{{ commodity.commodity_ticker_name }}</td>
-      <td>{{ commodity.commodity_descr }}</td>
-      <td>{{ commodity.unit_int_value }}</td>
-      <td>{{ commodity.unit_str_value }}</td>
-      <td>
-        <form action="{% url 'delete_commodity' commodity.id %}" method="POST">
+  <h2>List of Exchanges</h2>
+  <table class="exchange-table bordered-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for exchange in exchanges %}
+      <tr>
+        <td>{{ exchange.exchange_abbr }}</td>
+        <td>{{ exchange.exchange_name }}</td>
+        <td>
+          <form action="{% url 'delete_exchange' exchange.id %}" method="POST">
             {% csrf_token %}
             <button type="submit">Delete</button>
-        </form>
-      </td>
-    </tr>
-    {% empty %}
-    <tr>
-      <td colspan="4">No commodities yet.</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="2">No exchanges yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
-<h2>Add a new commodity</h2>
+  <hr style="border-top: 1px solid black;">
+  <h1 class="center-heading">Commodities management</h1>
 
-<form method="post">
-  {% csrf_token %}
-  {{ commodity_form.as_p }}
-  <button type="submit" name="commodity">Add Commodity</button>
-</form>
+  <div class="add-sidebar">
+    <h2>Add a new commodity</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ commodity_form.as_p }}
+      <button type="submit" name="commodity">Add Commodity</button>
+    </form>
+  </div>
 
-
-</style>
-
-<h1 class="center-heading">Currencies management</h1>
-
-<h1>Currencies</h1>
-
-<table class="commodity-table">
-  <thead>
-    <tr>
-      <th>Ticker Name</th>
-      <th>Description</th>
-      <th>Type</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for currency in currencies %}
-    <tr>
-      <td>{{ currency.currency_ticker_name }}</td>
-      <td>{{ currency.currency_descr }}</td>
-      <td>{{ currency.type }}</td>
-      <td>
-        <form action="{% url 'delete_currency' currency.id %}" method="POST">
+  <h1>Commodities</h1>
+  <table class="commodity-table bordered-table">
+    <thead>
+      <tr>
+        <th>Ticker Name</th>
+        <th>Description</th>
+        <th>Unit Integer Value</th>
+        <th>Unit String Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for commodity in commodities %}
+      <tr>
+        <td>{{ commodity.commodity_ticker_name }}</td>
+        <td>{{ commodity.commodity_descr }}</td>
+        <td>{{ commodity.unit_int_value }}</td>
+        <td>{{ commodity.unit_str_value }}</td>
+        <td>
+          <form action="{% url 'delete_commodity' commodity.id %}" method="POST">
             {% csrf_token %}
             <button type="submit">Delete</button>
-        </form>
-      </td>
-    </tr>
-    {% empty %}
-    <tr>
-      <td colspan="4">No currencies yet.</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4">No commodities yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
-{# ------------------------------------------------- #}
-<h2>Add a new currency</h2>
+  <hr style="border-top: 1px solid black;">
+  <h1 class="center-heading">Currencies management</h1>
 
-<form method="post">
-  {% csrf_token %}
-  {{ currency_form.as_p }}
-  <button type="submit" name="currency">Add Currency</button>
-</form>
+  <div class="add-sidebar">
+    <h2>Add a new currency</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ currency_form.as_p }}
+      <button type="submit" name="currency">Add Currency</button>
+    </form>
+  </div>
 
-{# ------------------------------------------------- #}
+  <h1>Currencies</h1>
+  <table class="currency-table bordered-table">
+    <thead>
+      <tr>
+        <th>Ticker Name</th>
+        <th>Description</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for currency in currencies %}
+      <tr>
+        <td>{{ currency.currency_ticker_name }}</td>
+        <td>{{ currency.currency_descr }}</td>
+        <td>{{ currency.type }}</td>
+        <td>
+          <form action="{% url 'delete_currency' currency.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4">No currencies yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
-<h2>Add a new Exchanges_Commodities</h2>
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 
-<form method="post">
-  {% csrf_token %}
-  {{ exchanges_commodities_form.as_p }}
-  <button type="submit" name="exchanges_commodities">Add Exchanges_Commodities</button>
-</form>
+  <hr style="border-top: 1px solid black;">
+  <h1 class="center-heading">Exchange - Commodities</h1>
+</body>
+</html>

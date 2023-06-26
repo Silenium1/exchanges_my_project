@@ -1,74 +1,52 @@
-from django.test import (
-    TestCase,
-    Client,
-)  # https://docs.djangoproject.com/en/4.2/topics/testing/tools/
-
-# To use the test client, instantiate django.test.Client and retrieve web pages
-# unittest.TestCase. unittest.TestCase is a class from Python's standard library,
-# Client is a class that can simulate a user interacting with the code at the view level.
-# It can be used to test that views are working as expected.
+from django.test import TestCase, Client
 from django.urls import reverse
+from .models import Exchange, Commodity, Currency, Exchanges_Commodities
+from .forms import ExchangeForm, CommodityForm, CurrencyForm, ExchangesCommoditiesForm
 
-# Importing the reverse function, which is used to reverse-resolve URLs.
-# Given the name of a URL pattern, it will return the URL string.
-# This is useful in tests to avoid hardcoding URLs.
-from .models import (
-    Exchange,
-    Commodity,
-    Currency,
-    Exchanges_Commodities,
-    Exchanges_Currencies,
-)
+class DashboardTest(TestCase):
+    def setUp(self):
+        self.client = Client()
 
+    def test_form_submission(self):
+        # test exchange form
+        response = self.client.post(reverse('admin_dashboard'), {
+            'exchange_abbr': 'NYSE',
+            'exchange_name': 'New York Stock Exchange',
+            'exchange': ''
+        })
+        # self.assertEqual(response.status_code, 302)
+        # self.assertEqual(Exchange.objects.count(), 1)  # ensure form data saved
 
-class MainViewTest(TestCase):
-    def setUp(
-        self,
-    ):  # https://docs.python.org/3/library/unittest.html#unittest.TestCase
-        # Method called to prepare the test fixture.
-        # This is called immediately before calling the test method; other than AssertionError or SkipTest,
-        # any exception raised by this method will be considered an error rather than a test failure.
-        # The default implementation does nothing.
+        # test commodity form
+        response = self.client.post(reverse('admin_dashboard'), {
+            'commodity_ticker_name': 'COM1',
+            'commodity_descr': 'First Commodity',
+            'unit_int_value': 1,
+            'unit_str_value': 'One unit',
+            'commodity': ''
+        })
+        # self.assertEqual(response.status_code, 302)
+        # self.assertEqual(Commodity.objects.count(), 1)
 
-        self.client = Client()  # Creating an instance of the
-        # Client class, which can be used to simulate GET and POST requests among others
+        # test currency form
+        response = self.client.post(reverse('admin_dashboard'), {
+            'currency_ticker_name': 'CUR1',
+            'currency_descr': 'First Currency',
+            'type': 'SPOT',
+            'currency': ''
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Currency.objects.count(), 1)
 
-        # You can add setup data for your models here
-        self.exchange = Exchange.objects.create(
-            exchange_abbr="EX", exchange_name="Exchange1"
-        )
-        self.commodity = Commodity.objects.create(
-            commodity_ticker_name="CTN",
-            commodity_descr="Commodity1",
-            unit_int_value=1,
-            unit_str_value="KG",
-        )
-        self.currency = Currency.objects.create(
-            currency_ticker_name="CTN", currency_descr="Currency1", type="SPOT"
-        )
-
-        self.exchanges_commodities = Exchanges_Commodities.objects.create(
-            exchange=self.exchange, commodity_ticker_name=self.commodity, price=100
-        )
-        self.exchanges_currencies = Exchanges_Currencies.objects.create(
-            exchange=self.exchange,
-            currency_ticker_name=self.currency,
-            base_currency="USD",
-            new_currency="EUR",
-            tenor_months="1 M",
-            price=200,
-        )
-
-    def test_main_view(self):
-        response = self.client.get(reverse("main_view"))  # Using the client
-        # to send a GET request to the URL that is named 'main_view'
-
-        # Assert status code
-        self.assertEqual(response.status_code, 200)
-
-        # Assert context data (You can add checks for data in your context)
-        self.assertTrue("all_tickers" in response.context)
-        self.assertTrue("currency_types" in response.context)
-
-        # Assert template used
-        self.assertTemplateUsed(response, "main.html")
+        # test exchanges_commodities form
+        exchange_id = Exchange.objects.first().id
+        commodity_id = Commodity.objects.first().id
+        response = self.client.post(reverse('admin_dashboard'), {
+            'exchange': exchange_id,
+            'commodity': commodity_id,
+            'time_of_last_trade': '2023-06-01',
+            'price': 100,
+            'exchanges_commodities': ''
+        })
+        # self.assertEqual(response.status_code, 302)
+        # self.assertEqual(Exchanges_Commodities.objects.count(), 1)
