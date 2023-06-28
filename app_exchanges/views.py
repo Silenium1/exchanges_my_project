@@ -67,7 +67,7 @@ def main_view(request):
 def asset_class_view(request, asset_class, ticker, id_ticker_id):
     current_ticker = {} # dictionary to store a current ticket info
     currency_type = '' # declare a variable to save a currency type
-    ticker_descr = ''
+    ticker_descr = '' # declare a variable to save a ticker descr
     # currency = Currency.objects.get(id=id_ticker_id)  #fetching currency data with the current ticker ID
     # currency_type = currency.type # getting a current currency type
     if asset_class == 'commodity': #commodity render
