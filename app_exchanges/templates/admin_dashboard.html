@@ -28,6 +28,12 @@
       border-color: #c3e6cb;
     }
 
+    .messages li.error {
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+      color: #721c24;
+    }
+
     .bordered-table {
       border-collapse: collapse;
     }
@@ -51,6 +57,15 @@
 <body>
   <h1 class="center-heading">Admin Dashboard</h1>
 
+   {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+
   <h1 class="center-heading">Exchanges management</h1>
 
   <div class="add-sidebar">
@@ -68,6 +83,7 @@
       <tr>
         <th>Name</th>
         <th>Description</th>
+        <th>Manage</th>
       </tr>
     </thead>
     <tbody>
@@ -110,6 +126,7 @@
         <th>Description</th>
         <th>Unit Integer Value</th>
         <th>Unit String Value</th>
+        <th>Manage</th>
       </tr>
     </thead>
     <tbody>
@@ -153,6 +170,7 @@
         <th>Ticker Name</th>
         <th>Description</th>
         <th>Type</th>
+        <th>Manage</th>
       </tr>
     </thead>
     <tbody>
@@ -176,15 +194,109 @@
     </tbody>
   </table>
 
-  {% if messages %}
-    <ul class="messages">
-      {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
 
   <hr style="border-top: 1px solid black;">
-  <h1 class="center-heading">Exchange - Commodities</h1>
+  <h1 class="center-heading">Exchange - Commodities</h1> {# title #}
+
+
+
+  <div class="add-sidebar">
+    <h2>Add a new commodity ticker</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ exchanges_commodities_form.as_p }}
+      <button type="submit" name="exchanges_commodities">Add Currency</button>
+    </form>
+  </div>
+
+<table class="currency-table bordered-table">
+    <thead>
+      <tr>
+        <th>Ticker Name</th>
+        <th>Exchange</th>
+        <th>Time of Last Trade</th>
+        <th>Price</th>
+        <th>Manage</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ticker in exchanges_commodities %}
+      <tr>
+        <td>{{ ticker.commodity_ticker_name }}</td>
+        <td>{{ ticker.exchange }}</td>
+        <td>{{ ticker.time_of_last_trade }}</td>
+          <td>{{ ticker.price }}</td>
+        <td>
+          <form action="{% url 'delete_exchanges_commodities' ticker.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4">No currencies yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+  <hr style="border-top: 1px solid black;">
+  <h1 class="center-heading">Exchange - Currencies</h1> {# title #}
+
+
+
+  <div class="add-sidebar">
+    <h2>Add a new currency ticker</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ exchanges_currencies_form.as_p }}
+      <button type="submit" name='exchanges_currencies'>Add Currency</button>
+    </form>
+  </div>
+
+<table class="currency-table bordered-table">
+    <thead>
+      <tr>
+        <th>Ticker Name</th>
+        <th>Exchange</th>
+        <th>base_currency</th>
+        <th>new_currency</th>
+        <th>tenor_months</th>
+        <th>settlement_date</th>
+        <th>settlement_date swap</th>
+        <th>Price</th>
+        <th>Manage</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for ticker in exchanges_currencies %}
+      <tr>
+        <td>{{ ticker.currency_ticker_name }}</td>
+        <td>{{ ticker.exchange }}</td>
+        <td>{{ ticker.base_currency }}</td>
+        <td>{{ ticker.new_currency }}</td>
+        <td>{{ ticker.tenor_months }}</td>
+        <td>{{ ticker.settlement_date }}</td>
+        <td>{{ ticker.settlement_date_swap }}</td>
+        <td>{{ ticker.price }}</td>
+        <td>
+          <form action="{% url 'delete_exchanges_currencies' ticker.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4">No currencies yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
 </body>
 </html>

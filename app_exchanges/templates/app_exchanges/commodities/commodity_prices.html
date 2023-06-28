@@ -23,7 +23,8 @@
                     </li>
                     {% for value in current_ticker.values %}
                         <li>
-                            <input type="checkbox" id="{{ value.exchange }}" name="exchange" value="{{ value.exchange }}" onclick="filterTable('{{ value.exchange }}', this);">
+                            <input type="checkbox" id="{{ value.exchange }}" name="exchange"
+                                   value="{{ value.exchange }}" onclick="filterTable('{{ value.exchange }}', this);">
                             <label for="{{ value.exchange }}">{{ value.exchange }}</label>
                         </li>
                     {% endfor %}
@@ -76,15 +77,15 @@
         };
 
         function updateCheckboxState(checkbox) {
-            localStorage.setItem(checkbox.id, checkbox.checked);
+            localStorage.setItem(checkbox.id, checkbox.checked); {# apply a new value to our checkbox( either checked or unchecked #}
             filterTable();
         }
 
         function selectAllExchanges(checkbox) {
-            const exchangeCheckboxes = document.getElementsByName('exchange');
-            for (let i = 0; i < exchangeCheckboxes.length; i++) {
-                exchangeCheckboxes[i].checked = checkbox.checked;
-                updateCheckboxState(exchangeCheckboxes[i]);
+            const exchangeCheckboxes = document.getElementsByName('exchange') {# create an array of exchanges #}
+            for (let i = 0; i < exchangeCheckboxes.length; i++) { {# for loop to iterate through  the array of checkboxes #}
+                exchangeCheckboxes[i].checked = checkbox.checked; {# if ALL is checked, we prepare to mark checked all other checkboxes   #}
+                updateCheckboxState(exchangeCheckboxes[i]); {# call the function to apply changes #}
             }
             filterTable();
         }
@@ -92,10 +93,10 @@
         function filterTable() {
             const exchangeCheckboxes = document.getElementsByName('exchange');
             const exchangeTable = document.querySelector('table');
-            const rows = exchangeTable.getElementsByTagName('tr');
-            let isAnyCheckboxChecked = false;
+            const rows = exchangeTable.getElementsByTagName('tr'); {# get a list of rows #}
+            let isAnyCheckboxChecked = false; {# by default False, than create a loop #}
 
-            for (let i = 0; i < exchangeCheckboxes.length; i++) {
+            for (let i = 0; i < exchangeCheckboxes.length; i++) { {# if any checkbox is checkes, set it TRUE #}
                 if (exchangeCheckboxes[i].checked) {
                     isAnyCheckboxChecked = true;
                     break;
@@ -103,7 +104,7 @@
             }
 
             for (let i = 1; i < rows.length; i++) {
-                const exchangeName = rows[i].getAttribute('class');
+                const exchangeName = rows[i].getAttribute('class'); {# get a name of the exchange #}
                 let shouldDisplay = false;
                 if (exchangeName) {
                     if (isAnyCheckboxChecked) {

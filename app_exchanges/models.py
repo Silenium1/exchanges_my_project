@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator,ValidationError
 
 
 
@@ -11,6 +11,18 @@ class Exchange(models.Model):
 
     def __str__(self):
         return f'{self.exchange_abbr} {self.exchange_name}'
+
+    def save(self, *args, **kwargs):
+        # Check for duplicate exchange abbreviation
+        if not self.pk and Exchange.objects.filter(exchange_abbr=self.exchange_abbr).exists():
+            self.errors = 'Exchange abbreviation already exists.'
+            return
+        # Check for duplicate exchange name
+        if not self.pk and Exchange.objects.filter(exchange_name=self.exchange_name).exists():
+            self.errors = 'Exchange name already exists.'
+            return
+        super().save(*args, **kwargs)
+
 
 class Commodity(models.Model):
     commodity_ticker_name = models.CharField(max_length=70)
@@ -51,7 +63,7 @@ class Currency(models.Model):
 class Exchanges_Commodities(models.Model):
     exchange = models.ForeignKey(Exchange, on_delete=models.CASCADE)
     commodity_ticker_name = models.ForeignKey(Commodity, on_delete=models.CASCADE)
-    time_of_last_trade = models.DateField(null=True, blank=True)
+    time_of_last_trade =models.CharField(max_length=30, null=True)
     price = models.IntegerField()
 
 
@@ -78,8 +90,8 @@ class Exchanges_Currencies(models.Model):
     base_currency = models.CharField(max_length=15, choices=currency_list, default=USD)
     new_currency = models.CharField(max_length=15, choices=currency_list, default=USD)
     tenor_months = models.CharField(max_length=15, choices=tenor_options, default='--')
-    settlement_date = models.DateField(null=True, blank=True)
-    settlement_date_swap = models.DateField(null=True, blank=True)
+    settlement_date = models.CharField(max_length=30, null=True)
+    settlement_date_swap = models.CharField(max_length=30, null=True)
     price = models.IntegerField()
 
 

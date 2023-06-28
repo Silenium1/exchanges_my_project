@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'app_exchanges/css/main.css' %}">
     <style>
-        /* Add custom styles for the checkbox list */
         .checkbox-list {
             list-style-type: none;
             padding: 0;
@@ -18,11 +17,12 @@
         }
     </style>
 </head>
+
+
 <body>
     <a class="top-right-link" href="{% url 'admin_dashboard' %}">Go to Admin Dashboard</a>{# link to the admin dashboard #}
     <div class="container">
         <div class="sidebar1"> {# link to the admin dashboard #}
-            <h2>Logo</h2>
             <form id="filter-form" method="GET" action="{% url 'main_view' %}">
                 <h3>Main Filters</h3>
                 <ul class="checkbox-list"> {# checkboxes for asset classes #}
@@ -48,12 +48,14 @@
                         </label>
                     </li>
                 </ul>
+
+                {# Filter for currency #}
                 <h3>Currency filters</h3>
                 <ul class="checkbox-list">
                     <li>
                         <strong>Currency Type</strong>
                     </li>
-                    {% for type in currency_types %}
+                    {% for type in currency_types %} {# iterate through our dictionary #}
                     <li>
                         <label class="checkbox-label">
                             <input type="checkbox" name="types" value="{{ type }}">  {# checkbox for each currency type #}
@@ -62,14 +64,15 @@
                     </li>
                     {% endfor %}
                 </ul>
-                <button type="submit">Apply Filters</button>
-                <button type="reset" onclick="location.href='{{ request.path }}'">Reset Filters</button> <!-- Updated button with onclick event -->
+                <button type="submit">Apply Filters</button> {# apply filters #}
+                <button type="reset" onclick="location.href='{{ request.path }}'">Reset Filters</button> {# reset filters #}
+
             </form>
         </div>
         <div class="content">
-            <h1>Exchanges Report</h1>
+            <h1>Exchanges Report</h1>  {# exchange report table #}
             <table>
-                <thead>
+                <thead> {# table rows #}
                     <tr>
                         <th>Asset class</th>
                         <th class="fixed-width">Ticker</th>
@@ -77,12 +80,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for ticker, info in all_tickers.items %}
+                    {% for ticker, info in all_tickers.items %} {# iterate through dictionary to get Asset class and Ticker #}
                     <tr class="ticker-row" data-asset-class="{{ info.asset_class }}">
                         <td>{{ info.asset_class }}</td>
                         <td class="fixed-width">{{ info.ticker }}</td>
                         <th>
                             <a href="{% url 'asset_class' info.asset_class|slugify info.ticker|slugify ticker.1 %}">Compare prices</a>
+                            {# link to our ticker page #}
                         </th>
                     </tr>
                     {% empty %}

@@ -11,6 +11,16 @@
     min-height: 100vh;
 }
 
+.checkbox-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.checkbox-list li {
+    margin-bottom: 5px;
+}
+
+
 .content {
     margin-left: 20px;
 }
