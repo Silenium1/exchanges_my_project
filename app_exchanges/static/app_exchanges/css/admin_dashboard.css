@@ -1,0 +1,18 @@
+.red {
+  color: red;
+}
+
+.exchange-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.exchange-table th,
+.exchange-table td {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+.exchange-table th {
+  background-color: #f2f2f2; /* Optional: Add background color to table header */
+}
