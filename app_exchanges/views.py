@@ -171,6 +171,7 @@ def admin_dashboard(request):
 
                 return redirect('admin_dashboard')
             else:
+                print('test')
                 print(f"Exchanges commodities form errors: {exchanges_commodities_form.errors}")
 
 
