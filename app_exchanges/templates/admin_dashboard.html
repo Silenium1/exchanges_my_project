@@ -1,62 +1,12 @@
+{% extends 'base.html' %}
+{% load static %} <!-- Loading the static files -->
+{% block content %}
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-    .center-heading {
-      text-align: center;
-    }
-
-    .add-sidebar{
-      float: right;
-    }
-
-    .messages {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .messages li {
-      margin-bottom: 10px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      background-color: #f9f9f9;
-    }
-
-    .messages li.success {
-      background-color: #d4edda;
-      border-color: #c3e6cb;
-    }
-
-    .messages li.error {
-      background-color: #f8d7da;
-      border-color: #f5c6cb;
-      color: #721c24;
-    }
-
-    .bordered-table {
-      border-collapse: collapse;
-    }
-
-    .bordered-table th,
-    .bordered-table td {
-      border: 1px solid #ccc;
-      padding: 10px;
-    }
-
-    .bordered-table th {
-      background-color: #f9f9f9;
-    }
-
-    .bordered-table .success {
-      background-color: #d4edda;
-      border-color: #c3e6cb;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="{% static 'app_exchanges/css/admin_dashboard.css' %}">
 </head>
 <body>
-  <h1 class="center-heading">Admin Dashboard</h1>
-
    {% if messages %}
     <ul class="messages">
       {% for message in messages %}
@@ -64,7 +14,6 @@
       {% endfor %}
     </ul>
   {% endif %}
-
 
   <h1 class="center-heading">Exchanges management</h1>
 
@@ -77,8 +26,7 @@
     </form>
   </div>
 
-  <h2>List of Exchanges</h2>
-  <table class="exchange-table bordered-table">
+  <table class="commodity-table bordered-table full-width-table">
     <thead>
       <tr>
         <th>Name</th>
@@ -94,7 +42,7 @@
         <td>
           <form action="{% url 'delete_exchange' exchange.id %}" method="POST">
             {% csrf_token %}
-            <button type="submit">Delete</button>
+            <button type="submit" class="delete-button">Delete</button>
           </form>
         </td>
       </tr>
@@ -106,9 +54,8 @@
     </tbody>
   </table>
 
-  <hr style="border-top: 1px solid black;">
-  <h1 class="center-heading">Commodities management</h1>
 
+  <h1 class="center-heading">Commodities management</h1>
   <div class="add-sidebar">
     <h2>Add a new commodity</h2>
     <form method="post">
@@ -118,8 +65,8 @@
     </form>
   </div>
 
-  <h1>Commodities</h1>
-  <table class="commodity-table bordered-table">
+
+  <table class="commodity-table bordered-table full-width-table">
     <thead>
       <tr>
         <th>Ticker Name</th>
@@ -139,7 +86,7 @@
         <td>
           <form action="{% url 'delete_commodity' commodity.id %}" method="POST">
             {% csrf_token %}
-            <button type="submit">Delete</button>
+            <button type="submit" class="delete-button">Delete</button>
           </form>
         </td>
       </tr>
@@ -163,8 +110,7 @@
     </form>
   </div>
 
-  <h1>Currencies</h1>
-  <table class="currency-table bordered-table">
+  <table class="commodity-table bordered-table full-width-table">
     <thead>
       <tr>
         <th>Ticker Name</th>
@@ -182,7 +128,7 @@
         <td>
           <form action="{% url 'delete_currency' currency.id %}" method="POST">
             {% csrf_token %}
-            <button type="submit">Delete</button>
+            <button type="submit" class="delete-button">Delete</button>
           </form>
         </td>
       </tr>
@@ -196,20 +142,18 @@
 
 
   <hr style="border-top: 1px solid black;">
-  <h1 class="center-heading">Exchange - Commodities</h1> {# title #}
-
-
+  <h1 class="center-heading">Commodity tickers management</h1>
 
   <div class="add-sidebar">
     <h2>Add a new commodity ticker</h2>
     <form method="post">
       {% csrf_token %}
       {{ exchanges_commodities_form.as_p }}
-      <button type="submit" name="exchanges_commodities">Add Currency</button>
+      <button type="submit" name="exchanges_commodities">Add Commodity</button>
     </form>
   </div>
 
-<table class="currency-table bordered-table">
+  <table class="commodity-table bordered-table full-width-table">
     <thead>
       <tr>
         <th>Ticker Name</th>
@@ -225,11 +169,11 @@
         <td>{{ ticker.commodity_ticker_name }}</td>
         <td>{{ ticker.exchange }}</td>
         <td>{{ ticker.time_of_last_trade }}</td>
-          <td>{{ ticker.price }}</td>
+        <td>{{ ticker.price }}</td>
         <td>
           <form action="{% url 'delete_exchanges_commodities' ticker.id %}" method="POST">
             {% csrf_token %}
-            <button type="submit">Delete</button>
+            <button type="submit" class="delete-button">Delete</button>
           </form>
         </td>
       </tr>
@@ -241,35 +185,30 @@
     </tbody>
   </table>
 
-
-
   <hr style="border-top: 1px solid black;">
-  <h1 class="center-heading">Exchange - Currencies</h1> {# title #}
-
-
+  <h1 class="center-heading">Currency tickers management</h1>
 
   <div class="add-sidebar">
     <h2>Add a new currency ticker</h2>
     <form method="post">
       {% csrf_token %}
       {{ exchanges_currencies_form.as_p }}
-      <button type="submit" name='exchanges_currencies'>Add Currency</button>
+      <button type="submit" name="exchanges_currencies">Add Currency</button>
     </form>
   </div>
 
-<table class="currency-table bordered-table">
+  <table class="commodity-table bordered-table full-width-table">
     <thead>
       <tr>
         <th>Ticker Name</th>
         <th>Exchange</th>
-        <th>base_currency</th>
-        <th>new_currency</th>
-        <th>tenor_months</th>
-        <th>settlement_date</th>
-        <th>settlement_date swap</th>
+        <th>Base Currency</th>
+        <th>New Currency</th>
+        <th>Tenor Months</th>
+        <th>Settlement Date</th>
+        <th>Settlement Date Swap</th>
         <th>Price</th>
         <th>Manage</th>
-
       </tr>
     </thead>
     <tbody>
@@ -286,17 +225,17 @@
         <td>
           <form action="{% url 'delete_exchanges_currencies' ticker.id %}" method="POST">
             {% csrf_token %}
-            <button type="submit">Delete</button>
+            <button type="submit" class="delete-button">Delete</button>
           </form>
         </td>
       </tr>
       {% empty %}
       <tr>
-        <td colspan="4">No currencies yet.</td>
+        <td colspan="8">No currencies yet.</td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
-
 </body>
 </html>
+{% endblock %}

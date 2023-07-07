@@ -1,27 +1,13 @@
 from django.db import models
-from django.urls import reverse
-from django.utils.text import slugify
-from django.core.validators import MaxValueValidator, MinValueValidator,ValidationError
 
 
-
-class Exchange(models.Model):
+class Exchange(models.Model):  #Exchasn
     exchange_abbr = models.CharField(max_length=70)
     exchange_name = models.CharField(max_length=70)
 
     def __str__(self):
         return f'{self.exchange_abbr} {self.exchange_name}'
 
-    def save(self, *args, **kwargs):
-        # Check for duplicate exchange abbreviation
-        if not self.pk and Exchange.objects.filter(exchange_abbr=self.exchange_abbr).exists():
-            self.errors = 'Exchange abbreviation already exists.'
-            return
-        # Check for duplicate exchange name
-        if not self.pk and Exchange.objects.filter(exchange_name=self.exchange_name).exists():
-            self.errors = 'Exchange name already exists.'
-            return
-        super().save(*args, **kwargs)
 
 
 class Commodity(models.Model):

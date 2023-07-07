@@ -1,4 +1,6 @@
-{% load static %}
+{% extends 'base.html' %}
+{% load static %} <!-- Loading the static files -->
+{% block content %}
 
 <html>
 <head>
@@ -6,73 +8,66 @@
     <meta name="description" content="Exchanges report">
     <title>Exchanges report</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Loading external CSS file -->
     <link rel="stylesheet" type="text/css" href="{% static 'app_exchanges/css/main.css' %}">
-    <style>
-        .checkbox-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        .checkbox-list li {
-            margin-bottom: 5px;
-        }
-    </style>
+
 </head>
 
-
 <body>
-    <a class="top-right-link" href="{% url 'admin_dashboard' %}">Go to Admin Dashboard</a>{# link to the admin dashboard #}
+
+
+
     <div class="container">
-        <div class="sidebar1"> {# link to the admin dashboard #}
-            <form id="filter-form" method="GET" action="{% url 'main_view' %}">
+        <div class="sidebar1">
+            <form id="filter-form" method="GET" action="{% url 'main_view' %}"> <!-- Creating a form for filtering -->
                 <h3>Main Filters</h3>
-                <ul class="checkbox-list"> {# checkboxes for asset classes #}
+                <ul class="checkbox-list">
                     <li>
                         <strong>Asset class</strong>
                     </li>
                     <li>
                         <label class="checkbox-label">
-                            <input type="checkbox" name="asset_class" value="all">{# checkbox for all #}
+                            <input type="checkbox" name="asset_class" value="all">
                             All Asset Classes
                         </label>
                     </li>
                     <li>
                         <label class="checkbox-label">
-                            <input type="checkbox" name="asset_class" value="Commodity">{# checkbox for commodity #}
+                            <input type="checkbox" name="asset_class" value="Commodity">
                             Commodity
                         </label>
                     </li>
                     <li>
                         <label class="checkbox-label">
-                            <input type="checkbox" name="asset_class" value="Currency">{# checkbox for currency #}
+                            <input type="checkbox" name="asset_class" value="Currency">
                             Currency
                         </label>
                     </li>
                 </ul>
 
-                {# Filter for currency #}
                 <h3>Currency filters</h3>
                 <ul class="checkbox-list">
                     <li>
                         <strong>Currency Type</strong>
                     </li>
-                    {% for type in currency_types %} {# iterate through our dictionary #}
+                    {% for type in currency_types %} <!-- iterate through currency types -->
                     <li>
                         <label class="checkbox-label">
-                            <input type="checkbox" name="types" value="{{ type }}">  {# checkbox for each currency type #}
+                            <input type="checkbox" name="types" value="{{ type }}">
                             {{ type }}
                         </label>
                     </li>
                     {% endfor %}
                 </ul>
-                <button type="submit">Apply Filters</button> {# apply filters #}
-                <button type="reset" onclick="location.href='{{ request.path }}'">Reset Filters</button> {# reset filters #}
-
+                <button type="submit">Apply Filters</button>
+                <button type="reset" onclick="location.href='{{ request.path }}'">Reset Filters</button>
             </form>
         </div>
         <div class="content">
-            <h1>Exchanges Report</h1>  {# exchange report table #}
-            <table>
-                <thead> {# table rows #}
+            <h1>Exchanges Report</h1>
+            <table class="full-width-table">
+                <thead>
                     <tr>
                         <th>Asset class</th>
                         <th class="fixed-width">Ticker</th>
@@ -80,13 +75,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for ticker, info in all_tickers.items %} {# iterate through dictionary to get Asset class and Ticker #}
+                    {% for ticker, info in all_tickers.items %} <!-- iterate through ticker info -->
                     <tr class="ticker-row" data-asset-class="{{ info.asset_class }}">
                         <td>{{ info.asset_class }}</td>
                         <td class="fixed-width">{{ info.ticker }}</td>
                         <th>
                             <a href="{% url 'asset_class' info.asset_class|slugify info.ticker|slugify ticker.1 %}">Compare prices</a>
-                            {# link to our ticker page #}
                         </th>
                     </tr>
                     {% empty %}
@@ -98,5 +92,6 @@
             </table>
         </div>
     </div>
+{% endblock %}
 </body>
 </html>

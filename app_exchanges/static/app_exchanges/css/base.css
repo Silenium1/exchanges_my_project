@@ -1,0 +1,62 @@
+/* CSS for header */
+
+body {
+  font-family: Helvetica Neue;
+  /* Additional font properties like font-size, font-weight, etc. can also be specified */
+}
+
+
+header {
+    font-family: "Nunito", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    background-color: #131722;
+}
+
+.logo {
+    margin-right: 0;
+}
+
+.logo img {
+    width: 100px; /* Increase the width value as per your requirement */
+    height: auto; /* Let the height adjust automatically */
+}
+
+/* CSS for horizontal menu */
+nav .horizontal-menu {
+    list-style-type: none;
+    padding: 12px;
+    margin: 0;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 0; /* Remove the margin-right */
+}
+
+.horizontal-menu li {
+    margin-right: 30px; /* Adjust the value as per your requirement */
+}
+
+.horizontal-menu li:last-child {
+    margin-right: 33px;
+}
+
+.horizontal-menu li a {
+    text-decoration: none;
+    justify-content: center;
+    color: #95A1A1;
+    font-weight: 400;
+    font-family: "Overpass", sans-serif;
+    font-size: 14px;
+    line-height: 21px;
+    display: block;
+    padding: 10px;
+}
+
+/* CSS for footer */
+footer {
+    background-color: black;
+    color: white;
+    padding: 20px;
+}

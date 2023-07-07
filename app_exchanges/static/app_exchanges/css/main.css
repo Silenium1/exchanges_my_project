@@ -1,7 +1,13 @@
-.container {
-    display: flex;
+/* main.css */
+
+body {
+    background-color: #F0F0F0;
 }
 
+.container {
+    display: flex;
+    width: 100%; /* Set the container width to 100% */
+}
 .sidebar1 {
     width: 222px;
     border-right: 1px solid black;
@@ -9,6 +15,7 @@
     font-family: 'IBM Plex Sans', sans-serif;
     font-weight: 500;
     min-height: 100vh;
+    background-color: #131722;
 }
 
 .checkbox-list {
@@ -20,7 +27,6 @@
     margin-bottom: 5px;
 }
 
-
 .content {
     margin-left: 20px;
 }
@@ -30,11 +36,12 @@ table {
     font-family: 'IBM Plex Sans', sans-serif;
     font-weight: 400;
     width: 100%;
+    table-layout: fixed; /* Add this property to make the table cells have equal width */
 }
 
 th,
 td {
-    border: 1px solid black;
+    border: 0px solid black;
     padding: 8px;
 }
 
@@ -47,7 +54,7 @@ td {
 }
 
 h1 {
-    font-family: 'Rubik', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
 }
 
@@ -66,7 +73,7 @@ h1 {
     top: 100%;
     left: 0;
     background-color: #fff;
-    border: 1px solid #ccc;
+    border: solid;
     padding: 0;
     list-style: none;
     z-index: 1;
@@ -125,4 +132,32 @@ input[type="checkbox"]:checked {
     position: fixed;
     top: 10px;
     right: 10px;
+}
+
+thead th {
+    background-color: #FFD500;
+}
+
+table {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #FFFFFF;
+    color: #9AA7AF;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #F4F4F4;
+    color: #9AA7AF;
+}
+
+.full-width-table {
+    width: 100%;
+}
+
+.sidebar1 {
+    font-size: 14px;
+    font-family: 'Nunito', sans-serif;
+    color: #95A1A1;
 }

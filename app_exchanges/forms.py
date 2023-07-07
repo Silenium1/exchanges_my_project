@@ -1,4 +1,3 @@
-
 from django import forms
 from .models import Exchange, Commodity, Currency, Exchanges_Commodities, Exchanges_Currencies
 

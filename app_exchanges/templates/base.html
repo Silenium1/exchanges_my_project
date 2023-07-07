@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Website Title</title>
+    <!-- Add your other head elements here -->
+    <link rel="stylesheet" type="text/css" href="app_exchanges">
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap" rel="stylesheet">
+     <!-- Loading external CSS files -->
+    <link rel="stylesheet" type="text/css" href="{% static 'app_exchanges/css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app_exchanges/css/footer.css' %}">
+
+</head>
+<body>
+    <!-- Add your header content here -->
+    <header>
+        <div class="logo">
+            <a href="{% url 'main_view' %}">
+                <img src="{% static 'app_exchanges/logo-dark.png' %}" alt="Logo">
+            </a>
+        </div>
+        <nav>
+            <ul class="horizontal-menu">
+                <li><a href="{% url 'main_view' %}">Home</a></li>
+                <li><a href="{% url 'admin_dashboard' %}">Admin Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Content specific to each page will be added here -->
+    {% block content %}
+    {% endblock %}
+
+    <!-- Add your footer content here -->
+    <footer>
+
+    </footer>
+</body>
+</html>

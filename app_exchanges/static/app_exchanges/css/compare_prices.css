@@ -1,16 +1,22 @@
 
+body {
+    background-color: #F0F0F0;
+}
 
 .container {
     display: flex;
 }
 
 .sidebar2 {
+    font-size: 14px;
     width: 222px;
     border-right: 1px solid black;
     flex-shrink: 0;
     font-family: 'IBM Plex Sans', sans-serif;
     font-weight: 500;
     min-height: 100vh;
+    background-color: black;
+    color: #95A1A1;
 }
 
 .content {
@@ -93,4 +99,22 @@ input[type="checkbox"]:checked + label {
 
 .main-page-link a:hover {
     text-decoration: underline;
-}/* Adds underline on hover */
+}
+
+thead th {
+    background-color: #FFD500;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #FFFFFF;
+    color: #9AA7AF;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #F4F4F4;
+    color: #9AA7AF;
+}
+
+.full-width-table {
+    width: 100%;
+}

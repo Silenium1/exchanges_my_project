@@ -1,7 +1,5 @@
 from django.contrib import admin
 from .models import  Exchange,Commodity, Currency,Exchanges_Commodities,Exchanges_Currencies
-from django.db.models import QuerySet
-from .forms import ExchangeForm
 
 
 class CurrencyAdmin(admin.ModelAdmin):

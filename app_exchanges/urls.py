@@ -1,10 +1,11 @@
-from django.urls import path, include
-from .views import main_view, page_not_found_view, delete_currency
-from .views import asset_class_view,admin_dashboard, delete_exchange, delete_commodity, delete_exchanges_commodities,delete_exchanges_currencies
+from django.urls import path
+from .views import main_view
+from app_exchanges.helper_functions.forms_helper import delete_currency, delete_exchange, delete_commodity, \
+    delete_exchanges_commodities, delete_exchanges_currencies
+from .views import asset_class_view,admin_dashboard
 
 urlpatterns = [
     path('', main_view, name='main_view'),
-    # path('<str:asset_class>/', asset_class_redirect, name='asset_class_redirect'),
     path('asset-class/<str:asset_class>/<str:ticker>/<int:id_ticker_id>/', asset_class_view, name='asset_class_view'),
     path('<str:asset_class>/<str:ticker>/<int:id_ticker_id>/', asset_class_view, name='asset_class'),
     path('admin_dashboard/', admin_dashboard, name='admin_dashboard'),

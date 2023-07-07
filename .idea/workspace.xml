@@ -4,8 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9745b32a-1a4b-4443-8042-5570d42d5e89" name="Changes" comment="Merge remote-tracking branch 'Exchanges_project/master'">
+    <list default="true" id="9745b32a-1a4b-4443-8042-5570d42d5e89" name="Changes" comment="1">
+      <change afterPath="$PROJECT_DIR$/app_exchanges/helper_functions/filters_helper.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_exchanges/helper_functions/forms_helper.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_exchanges/static/app_exchanges/css/base.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_exchanges/static/app_exchanges/js/commodity_prices.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_exchanges/static/app_exchanges/js/currency_prices.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_exchanges/static/app_exchanges/logo-dark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_exchanges/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_exchanges/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_exchanges/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_exchanges/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_exchanges/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_exchanges/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_exchanges/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_exchanges/static/app_exchanges/css/admin_dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_exchanges/static/app_exchanges/css/admin_dashboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_exchanges/static/app_exchanges/css/compare_prices.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_exchanges/static/app_exchanges/css/compare_prices.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_exchanges/static/app_exchanges/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_exchanges/static/app_exchanges/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_exchanges/templates/admin_dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_exchanges/templates/admin_dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_exchanges/templates/app_exchanges/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_exchanges/templates/app_exchanges/commodities/commodity_prices.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_exchanges/templates/app_exchanges/commodities/commodity_prices.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_exchanges/templates/app_exchanges/currencies/currency_prices.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_exchanges/templates/app_exchanges/currencies/currency_prices.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_exchanges/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_exchanges/templates/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_exchanges/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_exchanges/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_exchanges/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_exchanges/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_exchanges/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_exchanges/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +37,14 @@
   </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
     <envs>
@@ -27,6 +58,7 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
@@ -40,24 +72,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Notification.DisplayName-DoNotAsk-Database detector&quot;: &quot;Database detector&quot;,
-    &quot;Notification.DoNotAsk-Database detector&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/timur/Desktop/my_projects/project_exchanges&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.CommentHighlighterCustomTokensSettingsPage&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Notification.DisplayName-DoNotAsk-Database detector": "Database detector",
+    "Notification.DoNotAsk-Database detector": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/timur/Desktop/project_exchanges",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "settings.CommentHighlighterCustomTokensSettingsPage",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\timur\Desktop\my_projects\project_exchanges\app_exchanges\helper_functions" />
+    </key>
+  </component>
   <component name="RunManager" selected="Django Server.project_exchanges">
     <configuration name="Test Zodiac" type="Python.DjangoServer" factoryName="Django server">
       <module name="project_exchanges" />
@@ -139,7 +177,19 @@
       <workItem from="1687959101448" duration="1539000" />
       <workItem from="1687960659738" duration="11000" />
       <workItem from="1687961183126" duration="1283000" />
-      <workItem from="1687962474422" duration="1236000" />
+      <workItem from="1687962474422" duration="3806000" />
+      <workItem from="1687983727034" duration="1328000" />
+      <workItem from="1688054076471" duration="14876000" />
+      <workItem from="1688070193754" duration="2242000" />
+      <workItem from="1688091955545" duration="732000" />
+      <workItem from="1688092799104" duration="181000" />
+      <workItem from="1688121251093" duration="3807000" />
+      <workItem from="1688380990477" duration="2243000" />
+      <workItem from="1688383500897" duration="66000" />
+      <workItem from="1688383583018" duration="147000" />
+      <workItem from="1688383797648" duration="36000" />
+      <workItem from="1688383854345" duration="338000" />
+      <workItem from="1688726096096" duration="832000" />
     </task>
     <task id="LOCAL-00001" summary="backend">
       <option name="closed" value="true" />
@@ -189,7 +239,31 @@
       <option name="project" value="LOCAL" />
       <updated>1687963086211</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="1">
+      <option name="closed" value="true" />
+      <created>1687964220866</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1687964220866</updated>
+    </task>
+    <task id="LOCAL-00008" summary="1">
+      <option name="closed" value="true" />
+      <created>1687964224822</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1687964224822</updated>
+    </task>
+    <task id="LOCAL-00009" summary="1">
+      <option name="closed" value="true" />
+      <created>1687964275400</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1687964275400</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,6 +284,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="backend" />
     <MESSAGE value="Merge remote-tracking branch 'Exchanges_project/master'" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'Exchanges_project/master'" />
+    <MESSAGE value="1" />
+    <option name="LAST_COMMIT_MESSAGE" value="1" />
   </component>
 </project>

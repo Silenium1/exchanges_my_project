@@ -1,18 +1,188 @@
-.red {
-  color: red;
+body {
+    background-color: #F0F0F0;
 }
 
-.exchange-table {
+.center-heading {
+  text-align: center;
+}
+
+.add-sidebar{
+  float: right;
+}
+
+.messages {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.messages li {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #803232;
+}
+
+.messages li.success {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724; /* Desired text color for success messages */
+}
+
+.messages li.error {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24; /* Desired text color for error messages */
+}
+
+.bordered-table {
+  border-collapse: collapse;
+}
+
+.bordered-table th,
+.bordered-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.bordered-table th {
+  background-color: #FFD500;
+}
+
+.bordered-table .success {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+thead th {
+    background-color: #FFD500;
+}
+
+
+
+tbody tr:nth-child(odd) {
+    background-color: #FFFFFF;
+    color: #9AA7AF;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #F4F4F4;
+    color: #9AA7AF;
+}
+
+.full-width-table {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+form {
+  border: 1px solid #ccc;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form label {
+  display: block;
+}
+
+form input {
+  width: 100%;
+}
+
+/* admin_dashboard.css */
+
+/* Button Styles */
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #93C54B;
+  font-size: 16px;
+  cursor: pointer;
+
+}
+
+button[name="exchange"] {
+  background-color: #93C54B; /* Blue color for "Add Exchange" button */
+}
+
+button[name="commodity"] {
+  background-color: #93C54B; /* Green color for "Add Commodity" button */
+}
+
+button[name="currency"] {
+  background-color: #93C54B; /* Orange color for "Add Currency" button */
+}
+
+
+
+button.delete-button {
+  background-color: #d9534f; /* Red color for "Delete" buttons */
+  width: 100px; /* Fixed width */
+  height: 40px; /* Fixed height */
+  display: flex; /* Enable flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+/* Other Styles */
+.center-heading {
+  text-align: center;
+}
+
+.add-sidebar {
+  width: 300px;
+  float: left;
+  margin-right: 20px;
+}
+
+.commodity-table {
+  margin-top: 20px;
   border-collapse: collapse;
   width: 100%;
 }
 
-.exchange-table th,
-.exchange-table td {
-  border: 1px solid black;
+.commodity-table th,
+.commodity-table td {
   padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
-.exchange-table th {
-  background-color: #f2f2f2; /* Optional: Add background color to table header */
+.commodity-table th {
+  background-color: #f2f2f2;
+}
+
+.bordered-table {
+  border: 1px solid #ddd;
+}
+
+.full-width-table {
+  width: 100%;
+}
+
+.messages {
+  list-style-type: none;
+  padding: 0;
+}
+
+.messages li {
+  margin-bottom: 10px;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
+
+.commodity-table th,
+.bordered-table th,
+.full-width-table th {
+  background-color: #FFD500; /* Red color for table header */
 }

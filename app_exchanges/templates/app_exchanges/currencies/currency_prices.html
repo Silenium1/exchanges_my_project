@@ -1,5 +1,6 @@
+{% extends 'base.html' %}
 {% load static %}
-
+{% block content %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,13 +41,13 @@
                     <tr>
                         <th>Exchange</th>
                         <th>Type</th>
-                        {% if currency_type != "SPOT" and currency_type != "SWAP"%}
+                        {% if currency_type != "SPOT" and currency_type != "SWAP" %}
                             <th>Settlement date</th>
                         {% endif %}
-                        {% if currency_type == "SWAP"  %}
+                        {% if currency_type == "SWAP" %}
                             <th>Settlement date</th>
                             <th>Settlement date Swap</th>
-                        {%  endif %}
+                        {% endif %}
                         <th>Tenor</th>
                         <th>Price</th>
                     </tr>
@@ -75,72 +76,7 @@
         </div>
     </div>
 
-    <script>
-        window.onload = function() {
-            const checkboxes = document.querySelectorAll('#filter-form input[type=checkbox]');
-            checkboxes.forEach(function(checkbox) {
-                const checkboxState = localStorage.getItem(checkbox.id);
-                if (checkboxState === 'true') {
-                    checkbox.checked = true;
-                }
-            });
-            filterTable();
-        };
-
-        function updateCheckboxState(checkbox) { {# update a checkbox visually  #}
-            localStorage.setItem(checkbox.id, checkbox.checked);
-            filterTable();
-        }
-
-        function selectAllExchanges(checkbox) {   {# choose exchanges #}
-            const exchangeCheckboxes = document.getElementsByName('exchange'); {# choose exchanges #}
-            {# name="exchange" value="all" onclick="selectAllExchanges(this);"> #}
-            for (let i = 0; i < exchangeCheckboxes.length; i++) {
-                exchangeCheckboxes[i].checked = checkbox.checked;
-                updateCheckboxState(exchangeCheckboxes[i]);
-            }
-            filterTable();
-        }
-
-        function filterTable() {  {# filter out table #}
-            const exchangeCheckboxes = document.getElementsByName('exchange');
-            const exchangeTable = document.getElementById('exchange-table');
-            const rows = exchangeTable.getElementsByTagName('tr');
-            let isAnyCheckboxChecked = false;
-
-            for (let i = 0; i < exchangeCheckboxes.length; i++) {
-                if (exchangeCheckboxes[i].checked) {
-                    isAnyCheckboxChecked = true;
-                    break;
-                }
-            }
-
-            for (let i = 1; i < rows.length; i++) {
-                const exchangeName = rows[i].getElementsByTagName('td')[0].innerText;
-                let shouldDisplay = false;
-                if (exchangeName === 'Exchange') {
-                    shouldDisplay = true; // Display table header
-                } else {
-                    if (isAnyCheckboxChecked) {
-                        for (let j = 0; j < exchangeCheckboxes.length; j++) {
-                            if (exchangeCheckboxes[j].checked && exchangeCheckboxes[j].value === exchangeName) {
-                                shouldDisplay = true;
-                                break;
-                            }
-                        }
-                    } else {
-                        shouldDisplay = true; // Display all rows when no checkboxes are checked
-                    }
-                }
-                rows[i].style.display = shouldDisplay ? '' : 'none';
-            }
-        }
-
-        document.getElementById('filter-form').addEventListener('change', function(event) {
-            if (event.target.type === 'checkbox') {
-                updateCheckboxState(event.target);
-            }
-        });
-    </script>
+    <script src="{% static 'app_exchanges/js/currency_prices.js' %}"></script>
+    {% endblock %}
 </body>
 </html>
